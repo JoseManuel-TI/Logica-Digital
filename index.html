@@ -19,7 +19,11 @@
         <span class="brand__mark">LD</span>
         <span>Lógica Digital</span>
       </a>
-      <nav class="nav" aria-label="Principal">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
+        <span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>Menú</span>
+      </button>
+      <nav class="nav" id="main-nav" aria-label="Principal">
         <a href="#servicios">Servicios</a>
         <a href="#caso">Caso real</a>
         <a href="#proceso">Proceso</a>
@@ -163,6 +167,27 @@
     </div>
   </footer>
 
-  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const menuButton = document.querySelector(".menu-toggle");
+    const mainNav = document.getElementById("main-nav");
+    function closeMenu() {
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Abrir menú");
+      mainNav.classList.remove("is-open");
+    }
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "Abrir menú" : "Cerrar menú");
+      mainNav.classList.toggle("is-open", !isOpen);
+    });
+    mainNav.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeMenu();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
+  </script>
 </body>
 </html>
