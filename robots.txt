@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://josemanuel-ti.github.io/Logica-Digital/sitemap.xml
